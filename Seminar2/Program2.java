@@ -3,11 +3,9 @@ package Seminar2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.KeyStore.Entry;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,32 +23,33 @@ import java.util.Map;
 
 public class Program2 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         readWrite("G:/Домашнее задание GeekBrains/Exceptions/Seminar2/File.txt");
     }
 
     //метод чтения и записи
-    public static void readWrite(String path) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(path));
+    public static void readWrite(String path) {
         HashMap<String, String> sb = new HashMap<>();
         try {
-            
+            BufferedReader br = new BufferedReader(new FileReader(path));
             String string = br.readLine();
-
             while (string != null) {
                 String[] line = string.split("=");
                 sb.put(line[0], line[1]);
                 string = br.readLine();
             }
 
-            sb.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey() + " " + entry.getValue());
-            });
-            System.out.println();
+                // sb.entrySet().forEach(entry -> {
+                //     System.out.println(entry.getKey() + " " + entry.getValue());
+                // });
+                // System.out.println();
+
             replaceSymbol(sb); //вызываем метод замены
-        
-        } finally {
+
             br.close();
+            
+        } catch (IOException e) {
+            System.out.println("Unable to write to read: " + path);
         }
         
         try {
@@ -76,7 +75,7 @@ public class Program2 {
                     System.out.println("Number format exception");
                 }
             }
-            System.out.println(entry.getKey() + " " + entry.getValue());
+            // System.out.println(entry.getKey() + " " + entry.getValue());
         });
     }
 
